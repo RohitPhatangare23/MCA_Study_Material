@@ -1,0 +1,22 @@
+SMAP
+scriptingdemo_jsp.java
+JSP
+*S JSP
+*F
++ 0 scriptingdemo.jsp
+scriptingdemo.jsp
+*L
+6,12:49
+18,3:61,2
+21:67
+22,3:12
+24:68
+25:69,2
+26:71
+27,2:73
+28:73
+29:74,2
+30:76
+31,6:78
+36,5:84
+*E

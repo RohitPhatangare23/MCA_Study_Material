@@ -1,0 +1,10 @@
+var path = require('path');
+console.log(path.dirname('C:/Users/rohit/OneDrive/Desktop/WEB_TECH/_1_Practical_Built_In_module/Path.js'));
+console.log(path.basename('C:/Users/rohit/OneDrive/Desktop/WEB_TECH/_1_Practical_Built_In_module/Path.js'));
+console.log(path.extname('C:/Users/rohit/OneDrive/Desktop/WEB_TECH/_1_Practical_Built_In_module/Path.js'));
+console.log(path.join('/sys','/rohit','/_1_Practical_Built_In_module'));
+console.log(path.parse('C:/Users/rohit/OneDrive/Desktop/WEB_TECH/_1_Practical_Built_In_module/Path.js'));
+var mypath=(path.parse('C:/Users/rohit/OneDrive/Desktop/WEB_TECH/_1_Practical_Built_In_module/Path.js'));
+console.log(mypath.name);
+console.log(mypath.root);
+console.log(mypath.ext);

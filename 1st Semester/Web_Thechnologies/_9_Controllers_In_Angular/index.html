@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>ng controller</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<script>
+    var app = angular.module('myApp', [])
+    app.controller('myCtrl', function ($scope) {
+        $scope.fname = ""
+        $scope.lname = ""
+        $scope.age = ""
+    });  
+</script>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    Enter Your fname:<input type="text" ng-model="fname">
+    <br>
+    Enter Your 1name:<input type="text" ng-model="lname">
+    <br>
+    Enter Your age:<input type="text" ng-model="age">
+    <br>My name is<b><i><u>{{fname}} {{lname}}</u></i></b> and I am <b><i>{{age}}</i></b> year old.
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  </head>
+
+  <body name="form" ng-app="">
+    <form name="myForm">
+      Enter Your First Name:
+      <input name="firstname" name="fn" placeholder="First Name" required />
+      <span style="color: red" ng-show="myForm.fn.$dirty && myForm.fn.$invalid">
+        <span ng-show="myForm.fn.$error.required"></span> </span
+      ><br /><br />
+      Enter Your Last Name:
+      <input type="text" name="ln" placeholder="Last Name" required />
+      <span style="color: red" ng-show="myForm.ln.$dirty && myForm.ln.$invalid">
+        <span ng-show="myForm.ln.$error.required"></span> </span
+      ><br /><br />
+      Enter your Mail ID:
+      <input type="email" placeholder="Email-ID" required /><br /><br />
+      Select your Previous Stream :<select>
+        <option value=""></option>
+        <option value="Science">science</option>
+        <option value="Commerce">Commerce</option></select
+
+      ><br /><br />
+      Select your class : MCA DIV-A <input type="radio" value="MCA Div-A" /> MCA
+      DIV-B<input type="radio" value="MCA Div-B" /><br /><br />
+      Select Your Subject :WT<input type="checkbox" value="WT" required />
+      ADBMS<input type="checkbox" value="ADBMS" required /> JAVA<input
+        type="checkbox"
+        value="JAVA"
+        required
+      />
+      DS<input type="checkbox" value="DS" required /> IOT<input
+        type="checkbox"
+        value="IOT"
+      />
+      CC<input type="checkbox" value="CC" /><br /><br />
+      <input
+        type="submit"
+        ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||   myForm.email.$dirty && myForm.email.$invalid"
+      />
+    </form>
+  </body>
+</html>

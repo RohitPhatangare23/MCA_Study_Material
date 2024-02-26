@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>
+        Angular ng-mousedown Event
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('ngmousedownApp', []);
+        app.controller('ngmousedownCtrl', function ($scope) {
+            $scope.count = 0;
+            $scope.getdetails = function () {
+                $scope.count = 0;
+                $scope.count = $scope.count + 1;
+
+            }
+        });  
+    </script>
+</head>
+
+<body>
+    <div ng-app="ngmousedownApp" ng-controller="ngmousedownCtrl">
+        <h2>AngularJs ng-mousedown Event Example.</h2>
+        <input type="button" ng-mousedown="getdetails()" value="Click Here"><br /><br />
+        <span style="color:Red">No. of Times MouseDown Event Fired : {{count}}</span>
+    </div>
+</body>
+
+</html>

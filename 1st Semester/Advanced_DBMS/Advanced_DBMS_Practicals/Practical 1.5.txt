@@ -1,0 +1,36 @@
+CREATE TABLE student(
+	student_id INT NOT NULL,
+	student_name varchar(20),
+	student_dob DATE NOT NULL
+)
+partition by LIST(student_name)
+(
+partition stu_divA values('a','b','c','d','e','f','g','h','i','j','k'),
+partition stu_divB values('n','o','p','q','r','s','t','u','v','w','x','y','z')
+);
+
+insert into student values(1,'Rohit','09-jan-2002');
+insert into student values(2,'Ankit','11-may-2005');
+insert into student values(3,'mukesh','04-jul-2001');
+insert into student values(4,'Bhuvan','19-dec-2008');
+insert into student values(5,'Devank','29-nov-2002');
+insert into student values(6,'Shubham','17-aug-2012');
+insert into student values(7,'Ritessh','06-sep-2023');
+
+select * from user_tab_partitions;
+select table_name,partition_name,partition_position from user_tab_partitions where table_name='STUDENT';
+
+
+select * from student partition(stu_divA);
+select * from student partition(stu_divB);
+
+
+Alter tabel student add partition stu_null values('NULL');
+
+Alter tabel student add partition stu_default values('DEFAULT');
+
+select * from student partition(stu_default);
+
+select * from student partition(stu_divA);
+
+

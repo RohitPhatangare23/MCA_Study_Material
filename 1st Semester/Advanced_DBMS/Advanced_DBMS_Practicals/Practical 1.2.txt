@@ -1,0 +1,42 @@
+//Assignment 1
+CREATE TABLE tax(
+	eid INT NULL,
+	deptid INT NULL,
+	deptname Varchar(50) NULL,
+	tax_amount INT NULL,
+	state Varchar(50)
+)
+partition by range (tax_amount)
+(
+partition p1 values less than(10000),
+partition p2 values less than(20000),
+partition p3 values less than(30000),
+);
+
+insert into tax values(1,,101,'Purchase',5000,'Goa');
+insert into tax values(2,,102,'Sales',15000,'MAH');
+insert into tax values(3,,103,'HR',9000,'Gj');
+insert into tax values(4,,104,'Development',25000,'HAR');
+insert into tax values(5,,105,'Project Management',11000,'Up');
+insert into tax values(6,,106,'Database',19000,'Mp');
+insert into tax values(7,,107,'Testing',28000,'Panjab');
+
+select * from user_tab_partitions;
+
+select table_name,partition_name,partition_position from user_tab_partitions where table_name='TAX'; //
+
+
+select * from tax partition(p1); //  1 . view Specific partition (View Contents Of SubPartition)
+
+//2 update tax amount of employee working in purchase to 30000
+UPDATE tax SET tax_amount = 30000 WHERE deptname = 'Purchase';
+
+//3 Display name of employes having tax_amount more then 30000
+SELECT * FROM tax WHERE tax_amount>30000;
+
+//4 Rename p3 to p3_new
+alter table tax rename partition p1 to p3_new;
+select * from tax partition(p3_new); // view partition
+
+// 5. Merge Partition p1 and p2 
+alter table tax MERGE partitions p1,p2 into partition p12_new;

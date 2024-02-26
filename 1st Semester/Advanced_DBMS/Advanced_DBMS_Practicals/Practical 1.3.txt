@@ -1,0 +1,46 @@
+CREATE TABLE sales2(
+	prod_id INT NULL,
+	cust_id INT NULL,
+	time_id DATE NOT NULL,
+	channel_id char(50),
+	promo_id INT NOT NULL,
+	quntity_sold INT NULL,
+	amount_sold INT NULL
+)
+partition by range(time_id)
+(
+partition sales_q1_2023 values less than('01-apr-2023'),
+partition sales_q2_2023 values less than('01-jul-2023'),
+partition sales_q3_2023 values less than('01-oct-2023'),
+partition sales_q4_2023 values less than('01-jan-2024')
+);
+
+insert into sales2 values(1,1001,'09-jan-2023','A',1111,5000,9000);
+insert into sales2 values(2,1002,'10-nov-2023','B',2222,6000,3000);
+insert into sales2 values(3,1003,'16-mar-2023','C',3333,7000,4000);
+insert into sales2 values(4,1004,'02-dec-2023','D',4444,3000,2000);
+insert into sales2 values(5,1005,'19-jul-2023','E',5555,1000,4000);
+insert into sales2 values(6,1006,'03-may-2023','F',3333,4000,3000);
+
+select * from user_tab_partitions;
+
+//2. daisplay the partition=
+select table_name,partition_name,partition_position from user_tab_partitions where table_name='SALES2';
+
+// 1. view records in each partition= 
+select * from sales2 partition(sales_q1_2023);
+
+//3. add new partition 
+alter table sales add partition sales_q1_2024 values less than('01-apr-2024');
+
+// 4 delete all record from  partition 1 sales_q1_2023
+alter table sales2 drop partition sales_q1_2023;
+
+//5 delete a partition
+alter table sales2 truncate partition sales_q1_2023;
+
+//6 merage partiotion sales_01_2023 and sales_q2_2023 into sales_h_2022.
+alter table sales2 MERGE partitions sales_q2_2023,sales_q3_2023 into partition sale_merge_2023;
+
+
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="eventRegistration" ng-controller="RegistrationController">
+        <form name="registrationForm" ng-submit="submitForm()">
+          <label>Name: <span class="required">*</span></label>
+          <input type="text" name="name" ng-model="registration.name" ng-required="true" ng-model-options="{ updateOn: 'blur' }" />
+          <div class="error" ng-show="registrationForm.name.$touched && registrationForm.name.$invalid">
+            <div ng-show="registrationForm.name.$error.required">Name is required.</div>
+          </div>
+      
+          <label>Email: <span class="required">*</span></label>
+          <input type="email" name="email" ng-model="registration.email" ng-required="true" ng-model-options="{ updateOn: 'change' }" />
+          <div class="error" ng-show="registrationForm.email.$touched && registrationForm.email.$invalid">
+            <div ng-show="registrationForm.email.$error.required">Email is required.</div>
+            <div ng-show="registrationForm.email.$error.email">Invalid email format.</div>
+          </div>
+      
+          <label>Phone: <span class="required">*</span></label>
+          <input type="tel" name="phone" ng-model="registration.phone" ng-required="true" ng-model-options="{ debounce: { 'default': 500 } }" />
+          <div class="error" ng-show="registrationForm.phone.$touched && registrationForm.phone.$invalid">
+            <div ng-show="registrationForm.phone.$error.required">Phone is required.</div>
+            <div ng-show="registrationForm.phone.$error.pattern">Invalid phone format.</div>
+          </div>
+      
+          <label>Event: <span class="required">*</span></label>
+          <select name="event" ng-model="registration.event" ng-required="true">
+            <option value="">Select Event</option>
+            <option value="AngularJS">AngularJS</option>
+            <option value="React">React</option>
+            <option value="Vue">Vue</option>
+          </select>
+          <div class="error" ng-show="registrationForm.event.$touched && registrationForm.event.$invalid">
+            <div ng-show="registrationForm.event.$error.required">Event is required.</div>
+          </div>
+      
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+</body>
+</html>

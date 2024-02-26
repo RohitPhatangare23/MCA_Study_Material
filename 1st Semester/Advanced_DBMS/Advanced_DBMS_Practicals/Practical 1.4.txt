@@ -1,0 +1,37 @@
+//B) List partitioning; show descrete value ;
+
+CREATE TABLE sales_by_region(
+	product_id NUMBER,
+	quantity_sold INT NOT NULL,
+	sale_id DATE NOT NULL,
+	store_name VARCHAR(30),
+	state_code VARCHAR(30)
+)
+partition by list(state_code)
+(
+partition east values('OR','WB','AS','MZ','MN','SK'),
+partition west values('GJ','RJ','MH'),
+partition south values('KR','AP','TL'),
+partition north values('JK','UP','BH')
+);
+
+insert into sales_by_region values(1,100,'09-jan-2019','bata','OR');
+insert into sales_by_region values(2,200,'01-dec-2022','sparks','GJ');
+insert into sales_by_region values(3,300,'15-aug-2021','puma','TL');
+insert into sales_by_region values(4,400,'23-mar-2023','adidas','UP');
+insert into sales_by_region values(5,500,'12-feb-2020','lenskart','JK');
+insert into sales_by_region values(6,600,'19-sep-2019','zara','AP');
+insert into sales_by_region values(7,700,'03-nov-2022','hm','BH');
+
+//1
+select * from user_tab_partitions;
+select table_name,partition_name,partition_position from user_tab_partitions where table_name='SALES_BY_REGION';
+
+//2
+select * from sales_by_region partition(east);
+
+//3
+alter table sales_by_region add partition region_null values('default');
+
+//4
+

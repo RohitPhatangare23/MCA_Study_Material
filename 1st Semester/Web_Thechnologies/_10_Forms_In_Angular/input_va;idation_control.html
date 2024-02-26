@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>AngularJs Form and Input Validation Controls</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  </head>
+  <body>
+    <div ng-app="">
+      <form name="personForm">
+        First Name:
+        <input type="text" name="firstname" ng-model="person.fname" required />
+        <span
+          ng-show="personForm.firstname.$touched && personForm.firstname.$invalid "
+        >
+          Required! </span
+        ><br /><br />
+        Last Name:<input
+          type="text"
+          name="lastname"
+          ng-model="person.lname"
+          required
+        />
+        <span
+          ng-show="personForm.lastname.$dirty && personForm.lastname.$valid"
+        >
+          Thanks for Text </span
+        ><br /><br />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!--
+xml based configration
+file name always (Standard): applicationContext , u can change also
+Spring Container ko instruction provide karega
+-->
+
+    <!-- bean definitions here 
+    class and id here attributes,
+    inside a bean tag
+    and assign property print output with help of getter and setter
+    
+    here create object and with class and id 
+    all property inside them
+    -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    
+    <bean class="in.sp.beans.student" id="stdId">
+    
+        <property name="name" value="Rohit"/>
+        <property name="rollno" value="44"/>
+        <property name="email" value="hitman@gmail.com"/>
+            
+    </bean>
+    
+
+</beans>
+
+
+
+
+
+

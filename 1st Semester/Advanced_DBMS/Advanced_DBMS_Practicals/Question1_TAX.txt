@@ -1,0 +1,52 @@
+CREATE TABLE tax(
+	eid INT NOT NULL,
+	did INT NULL,
+	department VARCHAR(30),
+	taxamt INT NOT NULL,
+	state VARCHAR(30)
+)
+partition by range(taxamt)
+(
+partition p1 values less than(10000),
+partition p2 values less than(20000),
+partition p3 values less than(30000)
+);
+
+insert into tax values(1,1001,'loan',5000,'Maharashtra');
+insert into tax values(2,1002,'PPF',15000,'UP');
+insert into tax values(3,1003,'KYC',25000,'Gujarat');
+insert into tax values(4,1004,'deposit',18000,'panjab');
+
+//see a data from table 
+select * from tax;
+
+// 1 : See all sub partition
+select table_name,partition_name,partition_position,high_value from user_tab_partitions;
+
+select * from tax partition(p1); // view partition
+
+// partition add 
+alter table e1 add partition p5 values less than(25);
+
+//partition drop (structure and data deleted )
+// trucate (only data will remove)
+
+alter table e1 drop partition p5;
+
+//4 : RENAME  partition
+alter table tax rename partition p3 to p3_new;
+select * from tax partition(p3_new); // view partition
+
+//add column 
+alter table e1 add salary int NULL;
+
+
+//5 :  merage partiotion:
+alter table tax MERGE partitions p1,p2 into partition amt_merge_new;
+select * from tax partition(amt_merge_new);
+
+//2 : update :
+update tax set department='purchase' where taxamt=5000;
+
+//3 : Display
+select * from tax where taxamt>16000;

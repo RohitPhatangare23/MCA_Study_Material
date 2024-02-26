@@ -1,0 +1,48 @@
+CREATE TABLE e1(
+	id INT NULL,
+	fname VARCHAR(30),
+	lname VARCHAR(30),
+	hired DATE NOT NULL,
+	separated DATE NOT NULL,
+	job_code INT NOT NULL,
+	store_id INT NOT NULL
+)
+partition by range (store_id)
+(
+partition p1 values less than(6),
+partition p2 values less than(11),
+partition p3 values less than(16),
+partition p4 values less than(21),
+partition p4 values less than(25)
+);
+
+insert into e1 values(1,'rohit','phatangare','09-jan-2019','10-feb-2020',1001,19);
+insert into e1 values(2,'raj','kumar','15-jan-2016','1-feb-2029',1002,13);
+insert into e1 values(3,'bhuvan','bam','09-may-2006','10-nov-2021',1003,9);
+insert into e1 values(4,'jethalal','gada','09-dec-2018','10-feb-2028',1004,4);
+insert into e1 values(5,'mukesh','patil','09-jun-2002','10-aug-2026',1005,20);
+insert into e1 values(5,'kaka','sorthi','02-jun-2009','1-aug-2012',1006,24);
+
+
+select * from user_tab_partitions;
+
+select table_name,partition_name,partition_position,high_value from user_tab_partitions;
+
+select * from e1 partition(p1); // view partition
+
+// partition add 
+alter table e1 add partition p5 values less than(25);
+
+//partition drop (structure and data deleted )
+// trucate (only data will remove)
+
+alter table e1 drop partition p5;
+
+// RENAME  partition
+alter table e1 rename partition p1 to pl1;
+select * from e1 partition(pl1); // view partition
+
+//add column 
+alter table e1 add salary int NULL;
+
+

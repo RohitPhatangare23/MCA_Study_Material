@@ -1,0 +1,48 @@
+
+CREATE TABLE e3(
+	id INT NOT NULL,
+	employe VARCHAR(30),
+	deptno INT NULL,
+	salary INT NULL
+)
+partition by range(salary)
+(
+partition p1 values less than(10000),
+partition p2 values less than(25000),
+partition p3 values less than(50000),
+partition p4 values less than(75000)
+);
+insert into e3 values(1,'rohit',1001,9000);
+insert into e3 values(2,'raj',1002,4000);
+insert into e3 values(3,'ankit',1003,20000);
+insert into e3 values(4,'bhuvan',1004,6000);
+insert into e3 values(5,'kartik',1005,9000);
+insert into e3 values(6,'yash',1006,7000);
+// ----------- take pract e1 table.
+select * from e1;
+desc e1;
+
+select count (*) from e3;  //Cout row
+select count (*) over() from e3;
+select sum(salary) from e3;
+select sum(salary) over() from e3;
+select First(employe) from e3;
+
+/Roll_number
+select id,employe,salary,row_number() over(partition by deptno order by salary) from e3;
+select id,employe,salary,row_number() over(order by salary) Row_Number from e3;
+
+//rank
+select RANK() Over(Order By salary) from e3;
+
+//Dense_rank;
+select Dense_Rank() Over(Order By Salary) from e3;
+
+//Rollup
+select id,salary ROLLUP(id,salary) from e3;
+
+// last 3 salary
+select * from (select employe,salary, row_number() over(order by salary desc)rn from e3) where rn<=3 order by salary desc;
+
+//second lowest salary value.
+select a.id,a.employe,a.salary from(select id,deptno,salary,dense_rank() over(order by salary desc)as Rank from e3)a where a.Rank=2);

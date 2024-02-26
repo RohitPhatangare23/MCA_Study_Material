@@ -1,0 +1,104 @@
+// Abstract data type
+
+//-------------------Q1----------------------------------
+create or replace type name_type as object(fname varchar(20), mname varchar(20), lname varchar(20));
+CREATE TABLE customer2(
+	cust_no INT NOT NULL,
+	cust_name name_type,
+	product varchar(20),
+	price INT NULL
+);
+
+//alter sturcture data type for coloumn;
+alter table customer modify product varchar(50);
+
+//insert data into table;
+insert into customer2 values(1,name_type('Rohit','Raosaheb','Phatangare'),'shoes',9000);
+insert into customer2 values(2,name_type('ankit','anil','deshpande'),'bike',4000);
+insert into customer2 values(3,name_type('nile','nitin','mukesh'),'sope',20000);
+insert into customer2 values(4,name_type('bhuvan','rajesh','bam'),'laptop',6000);
+insert into customer2 values(5,name_type('virat','ram','koli'),'mobile',9000);
+insert into customer2 values(6,name_type('mashendra','singh','dhoni'),'ship',7000);
+
+// i) display the first name of all customer
+select c.cust_name.fname from customer2 c;
+
+// ii) display the detail of customer who purchase the laptop
+select * from customer2 where product='laptop';
+
+//-------------------Q2----------------------------------
+create or replace type date_type as object(day varchar(20), month varchar(20), year int);
+CREATE TABLE ordertest2(
+	ord_no INT NOT NULL,
+	item varchar(20),
+	cust_name varchar(50),
+	order_date date_type
+);
+insert into ordertest2 values(1,'cricket','rohit',date_type('23','jan',2014));
+insert into ordertest2 values(2,'gulabjam','raj',date_type('01','feb',2002));
+insert into ordertest2 values(3,'chess','mukesh',date_type('23','mar',2019));
+insert into ordertest2 values(4,'basketball','krishana',date_type('23','nov',2023));
+insert into ordertest2 values(5,'football','mahadev',date_type('02','dec',2005));
+insert into ordertest2 values(6,'cricket','ram',date_type('23','apri',2014));
+insert into ordertest2 values(7,'vada pav','nihit',date_type('20','may',2018));
+insert into ordertest2 values(8,'samosa','sharvil',date_type('01','apri',2018));
+
+//i) display total no. of order dispatched in the year 2018
+select * from ordertest2 o where o.order_date.year=2018;
+
+
+//ii) display the orders in the descending order of month and year
+select * from ordertest2 d ORDER BY d.order_date.year,d.order_date.month DESC;
+//OR Take all of them as NUMBER.
+select * from ordertest2 ORDER BY order_date.year DESC,order_date.month DESC;
+
+
+
+
+//-------------------Q3----------------------------------
+create or replace type book_type as object(book_no int, title varchar(20),author varchar(20), pub_date DATE,price int);
+
+create table books of book_type;
+
+INSERT INTO books values(book_type(1,'The Sun Also Rises','Ernest Hemingway','12-oct-1920',1500)); 
+INSERT INTO books values(book_type(2,'The Fault in Stars','John Green','10-jan-2020',1100)); 
+INSERT INTO books values(book_type(3,'The Sound and Fury','William Faulkner','21-jul-1929',800)); 
+INSERT INTO books values(book_type(4,'Computer networks','Tanenbaum','05-jan-1939',500)); 
+INSERT INTO books values(book_type(5,'Anatomy Book Cover','Milan Kundera','19-jan-1984',950));  
+
+Q1 =>
+SELECT * FROM books WHERE Author = 'Tanenbaum';
+
+Q2 => 
+SELECT * FROM books where price between 1000 and 2500 and pub_date >TO_DATE('2018-01-01','YYYY-MM-DD');
+
+
+//--------------------------------Q4----------------------------------------
+create or replace type hostel_type as object(attributehost_no VARCHAR(20),host_name varchar(20),gender varchar(40));
+
+CREATE TABLE Student (
+    sid INT NOT NULL,
+    sname VARCHAR(255),
+    gender VARCHAR(10),
+    year INT NOT NULL,
+    hostel_info hostel_type
+);
+-- Insert data into the hostel table
+INSERT INTO student values(1,'Aishwarya','Female',2018,hostel_type(1,'ABC','Girl')); 
+INSERT INTO student values(2,'Aakanksha','Female',2023,hostel_type(2,'PQR','Girl')); 
+INSERT INTO student values(3,'Jay','Male',2019,hostel_type(3,'HTY','Boy')); 
+INSERT INTO student values(4,'Soham','Male',2020,hostel_type(4,'LON','Boy'));
+INSERT INTO student values(5,'Sahil','Male',2015,hostel_type(5,'XYZ','Boy'));
+
+Q1  Display the details of all girl students
+=>
+select * from student a where a.hostel_info.gender='Girl';
+
+Q2 Display the Students in hostel no 2.
+=> 
+select * from Student a where a.hostel_info.host_no=2;
+
+SELECT s.sid, s.sname, s.gender
+FROM Student s
+WHERE DEREF(s.hostel_info).host_no = 2;
+

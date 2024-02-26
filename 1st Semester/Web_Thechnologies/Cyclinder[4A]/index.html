@@ -1,0 +1,40 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="CylinderApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cylinder Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="cylinderModule.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-controller="CylinderController">
+    <h1>Cylinder Calculator</h1>
+
+    <label for="radius">Enter the radius of the cylinder's base:</label>
+    <input type="number" ng-model="radius" id="radius" required>
+
+    <label for="height">Enter the height of the cylinder:</label>
+    <input type="number" ng-model="height" id="height" required>
+
+    <button ng-click="calculateSurfaceArea()">Calculate Surface Area</button>
+    <button ng-click="calculateVolume()">Calculate Volume</button>
+
+    <div ng-show="resultSurfaceArea">
+        <p>The surface area of the cylinder is: {{ resultSurfaceArea.toFixed(2) }}</p>
+    </div>
+
+    <div ng-show="resultVolume">
+        <p>The volume of the cylinder is: {{ resultVolume.toFixed(2) }}</p>
+    </div>
+
+    <div ng-show="error">
+        <p>Error: {{ error }}</p>
+    </div>
+</body>
+
+</html>

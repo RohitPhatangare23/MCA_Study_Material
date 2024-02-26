@@ -1,0 +1,24 @@
+<html>
+
+<head>
+   <title>Angular JS Filters</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
+   </script>
+</head>
+
+<body>
+   <div ng-app="mainApp" ng-controller="empController">
+      <br> Name in Upper Case:{{employee.firstName | uppercase}}
+      <br> Name in Lower Case:{{employee.lastName | lowercase}}
+      <br>salary:{{employee.salary | currency}}
+   </div>
+   <script>
+      var mainApp = angular.module("mainApp", []); mainApp.controller('empController', function ($scope) {
+         $scope.employee = {
+            firstName: "Shradhha Kapoor", lastName: "Shradhha Kapoor", salary: "50000",
+         }
+      });  
+   </script>   
+</body>
+
+</html>
