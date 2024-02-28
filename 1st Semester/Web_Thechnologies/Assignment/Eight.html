@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="styleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Directives - Styling</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+
+        .text-danger {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body ng-controller="styleController">
+
+    <h2>AngularJS Directives - Styling</h2>
+
+    <div>
+        <label>Toggle Highlight:</label>
+        <input type="checkbox" ng-model="highlightToggle">
+    </div>
+
+    <div ng-class="{ 'highlight': highlightToggle }">
+        This div is highlighted based on the checkbox state.
+    </div>
+
+    <br>
+
+    <div>
+        <label>Enter Danger Zone:</label>
+        <input type="text" ng-model="dangerInput">
+    </div>
+
+    <div ng-class="{ 'text-danger': dangerInput === 'danger' }">
+        This text turns red and bold when you type 'danger'.
+    </div>
+
+    <br>
+    
+    <div>
+        <label>Change Text Color:</label>
+        <input type="color" ng-model="textColor">
+    </div>
+
+    <div ng-style="{ 'color': textColor }">
+        This text changes color based on the color input.
+    </div>
+
+    <script>
+        var app = angular.module('styleApp', []);
+
+        app.controller('styleController', function($scope) {
+            $scope.highlightToggle = false;
+            $scope.dangerInput = '';
+            $scope.textColor = '#000000';
+        });
+    </script>
+</body>
+</html>

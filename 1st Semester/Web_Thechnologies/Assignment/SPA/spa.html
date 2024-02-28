@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="navbarApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS SPA</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="navbarController">
+
+    <div class="navbar">
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <h1>This Is Single Page Application . </h1>
+
+    <!-- <div ng-view></div> -->
+
+    <!-- <script>
+        var app = angular.module('navbarApp', ['ngRoute']);
+
+        app.config(function($routeProvider) {
+            $routeProvider
+                .when('/home', {
+                    template: '<h2>Home Page Content</h2>'
+                })
+                .when('/about', {
+                    template: '<h2>About Page Content</h2>'
+                })
+                .when('/contact', {
+                    template: '<h2>Contact Page Content</h2>'
+                })
+                .otherwise({
+                    redirectTo: '/home'
+                });
+        });
+
+        app.controller('navbarController', function($scope) {
+            // Additional controller logic if needed
+        });
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <label>
+            List Of Employes Order by Salary :
+            <select ng-model="orderBy" ng-change="sortData()">
+                
+                <option value="desc">Descending</option>
+                <option value="asc">Ascending</option>
+            </select>
+        </label>
+        <br />
+        <label>
+            Change Name Style :
+            <select ng-model="caseBy" ng-change="convertCase()">
+                <option value="">Select</option>
+                <option value="upper">Upercase</option>
+                <option value="lower">Lowecase</option>
+            </select>
+        </label>
+        <label>
+            <br />
+            Change Number to Currency :
+            <select ng-model="conversionBy" ng-change="formatCurrency()">
+                <option value="">Select</option>
+                <option value="num">Number</option>
+                <option value="cur">Currency</option>
+            </select>
+        </label>
+
+        <table border="1">
+            
+            <tbody>
+                <tr ng-repeat="employee in employees | orderBy:'salary':(orderBy ==='desc')">
+                    <td>{{employee.empid}}</td>
+                    <td>{{employee.name}}</td>
+                    <td> {{employee.salary | currency }}</td>
+                    <td>{{employee.doj}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        angular.module("myApp", []).controller("myCtrl", function ($scope) {
+            $scope.employees = [
+                { empid: 1, name: "ROHIT", salary: 6000, doj: "01-02-2022" },
+                { empid: 2, name: "DEVANK", salary: 2000, doj: "29-08-2020" },
+                { empid: 3, name: "ANKIT", salary: 1000, doj: "5-12-2015" },
+                { empid: 4, name: "YASH", salary: 8000, doj: "10-09-208" },
+                { empid: 5, name: "YUVA", salary: 9000, doj: "16-03-2014" },
+            ];
+
+            //$scope.orderBy = "asc";
+            $scope.sortData = function () {
+                if ($scope.orderBy === "desc") {
+                    $scope.employees.reverse();
+                }
+            };
+            $scope.convertCase = function () {
+                angular.forEach($scope.employees, function (employee) {
+                    employee.name =
+                        $scope.caseBy === "upper"
+                            ? employee.name.toUpperCase()
+                            : employee.name.toLowerCase();
+                });
+            };
+
+            $scope.formatCurrency = function () {
+                angular.forEach($scope.employees, function (employee) {
+                    employee.salary =
+                        $scope.conversionBy === "num"
+                            ? employee.salary
+                            : employee.salary;
+                });
+            };
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eventDemoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Event Directives Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .event-container {
+            margin: 50px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body ng-controller="eventDemoController">
+
+    <h2>AngularJS Event Directives Demo</h2>
+
+    <div class="event-container"
+         ng-mouseenter="onMouseEnter()"
+         ng-mouseleave="onMouseLeave()"
+         ng-click="onClick()"
+         ng-keypress="onKeyPress($event)"
+         tabindex="0">
+        Hover over, click, or press a key inside this box.
+    </div>
+
+    <div>
+        <p><strong>Mouse Events:</strong> {{ mouseEvent }}</p>
+        <p><strong>Click Event:</strong> {{ clickEvent }}</p>
+        <p><strong>Key Press Event:</strong> {{ keyPressEvent }}</p>
+    </div>
+
+    <script>
+        var app = angular.module('eventDemoApp', []);
+
+        app.controller('eventDemoController', function($scope) {
+            $scope.mouseEvent = '';
+            $scope.clickEvent = '';
+            $scope.keyPressEvent = '';
+
+            $scope.onMouseEnter = function() {
+                $scope.mouseEvent = 'Mouse Enter';
+            };
+
+            $scope.onMouseLeave = function() {
+                $scope.mouseEvent = 'Mouse Leave';
+            };
+
+            $scope.onClick = function() {
+                $scope.clickEvent = 'Click';
+            };
+
+            $scope.onKeyPress = function(event) {
+                $scope.keyPressEvent = 'Key Press: ' + String.fromCharCode(event.which);
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<head>
+    <title>
+        AngularJs Form Input Fields Validation Example using CSS class </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('formApp', []); app.controller('formCtrl', function ($scope) {
+            $scope.sendForm = function () {
+                $scope.msg = 'Thank You ,  Your Form Is Submited Successfully';
+            };
+            $scope.getClass = function (color) {
+                return color.toString();
+            }
+        });  
+    </script>
+    <style>
+        .valid.false {
+            background: red;
+        }
+
+        .valid.true {
+
+            background: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body ng-app="formApp" ng-controller="formCtrl">
+    <h3>Form validation by using CSS in AngularJs</h3>
+    <form name="personForm" ng-submit="sendForm()">
+        <label for="name">First Name</label>
+        <input id="fname" name="name" type="text" ng-model="person.fname" required />
+        <span class="error" ng-show="personForm.name.$error.required"> Required! </span>
+
+        <br />
+        <br />
+
+        <label for="name">Last Name</label>
+        <input id="lname" name="name" type="text" ng-model="person.lname" required />
+        <span class="error" ng-show="personForm.name.$error.required"> Required! </span>
+
+        <br />
+        <br />
+
+        <label for="name">Gender : </label>
+        <select name="" id="">
+            <option value="">Select</option>
+            <option value="">Male</option>
+            <option value="">Female</option>
+            <option value="">Other</option>
+        </select>
+
+        <br>
+        <br>
+
+        <label for="class">Class : </label>
+        <input id="class" name="address" type="text" ng-model="person.class" required />
+        <span class="error" ng-show="personForm.class.$error.required"> Required! </span>
+
+         <br />
+         <br />
+
+        <label for="depart">Department : </label>
+        <input id="depart" name="address" type="text" ng-model="person.depart" required />
+        <span class="error" ng-show="personForm.depart.$error.required"> Required! </span>
+
+         <br />
+         <br />
+
+        <label for="event">Type Of Event : </label>
+        <input id="event" name="address" type="text" ng-model="person.event" required />
+        <span class="error" ng-show="personForm.event.$error.required"> Required! </span>
+
+         <br />
+         <br />
+
+        <label for="contact">Contact</label>
+        <input id="mobile" name="mobile" type="number" ng-model="person.mobile" required />
+        <span class="error" ng-show="personForm.mobile.$error.required">Required number!</span>
+        <span class="error" ng-show="personForm.mobile.$error.mobile">Invalid mobile!</span> 
+
+        <br />
+        <br />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" ng-model="person.email" required />
+        <span class="error" ng-show="personForm.email.$error.required">Required!</span>
+        <span class="error" ng-show="personForm.email.$error.email">Invalid Email!</span>
+
+        <br />
+        <br />
+
+        <input type="checkbox" ng-model="terms" name="terms" id="terms" required />
+        <label for="terms">I Agree to the terms.</label>
+        <span class="error" ng-show="personForm.terms.$error.required">You must agree to the terms</span> 
+
+        <br />
+        <br />
+
+        <button type="submit">Submit Form</button>
+
+        <br />
+        <br />
+
+        <h3>Registration Confimation.</h3>
+
+        <span>{{msg}}</span>
+        
+    </form>
+</body>
+
+</html>
